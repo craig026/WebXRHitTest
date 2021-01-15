@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <!--
 Copyright 2018 The Immersive Web Community Group
 
@@ -80,7 +80,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       vec3.set(shadow.scale, 0.15, 0.15, 0.15);
       arObject.addNode(shadow);
 
-      const MAX_FLOWERS = 30;
+      const MAX_FLOWERS = 1;
       let flowers = [];
 
       // Ensure the background is transparent for AR.
@@ -158,13 +158,16 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
       // Adds a new object to the scene at the
       // specificed transform.
-      function addARObjectAt(matrix) {
-        let newFlower = arObject.clone();
-        newFlower.visible = true;
-        newFlower.matrix = matrix;
-        scene.addNode(newFlower);
+        function addARObjectAt(matrix) {
+            if (flowers.length < MAX_FLOWERS) {
+                let newFlower = arObject.clone();
+                newFlower.visible = true;
+                newFlower.matrix = matrix;
+                scene.addNode(newFlower);
 
-        flowers.push(newFlower);
+                flowers.push(newFlower);
+            }
+
 
         // For performance reasons if we add too many objects start
         // removing the oldest ones to keep the scene complexity
